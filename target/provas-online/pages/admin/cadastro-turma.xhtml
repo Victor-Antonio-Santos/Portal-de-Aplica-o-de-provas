@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<ui:composition template="/templates/admin.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+        <div class="page-title">
+            <h1>Cadastro de Turmas</h1>
+            <p class="muted">Crie e mantenha as turmas do seu treinamento. Somente turmas ativas ficam disponiveis no auto cadastro do colaborador.</p>
+        </div>
+        <div class="panel-box">
+            <h:form id="formTurma">
+                <p:messages id="msgs" showDetail="true" closable="true" autoUpdate="true"/>
+                <div class="form-grid">
+                    <div>
+                        <p:outputLabel for="nome" value="Nome da turma"/>
+                        <p:inputText id="nome" value="#{turmaCadastroBean.turma.nome}" styleClass="full-width" required="true"/>
+                    </div>
+                    <div>
+                        <p:outputLabel for="status" value="Status"/>
+                        <p:selectOneMenu id="status" value="#{turmaCadastroBean.turma.status}" styleClass="full-width">
+                            <f:selectItems value="#{turmaCadastroBean.statusDisponiveis}" var="status" itemLabel="#{status}" itemValue="#{status}"/>
+                        </p:selectOneMenu>
+                    </div>
+                </div>
+                <div class="action-buttons" style="margin-top:20px;">
+                    <p:commandButton value="Salvar turma" actionListener="#{turmaCadastroBean.salvar}" update="formTurma :messages" icon="pi pi-save"/>
+                    <p:commandButton value="Nova turma" actionListener="#{turmaCadastroBean.novo}" update="formTurma" process="@this" styleClass="p-button-secondary"/>
+                </div>
+                <p:separator/>
+                <p:dataTable value="#{turmaCadastroBean.turmas}" var="turma" paginator="true" rows="8" reflow="true">
+                    <p:column headerText="Turma">#{turma.nome}</p:column>
+                    <p:column headerText="Status">#{turma.status}</p:column>
+                    <p:column headerText="Treinador">#{turma.aplicadorResponsavel.nome}</p:column>
+                    <p:column headerText="Acoes">
+                        <div class="action-buttons">
+                            <p:commandButton value="Editar" actionListener="#{turmaCadastroBean.editar(turma)}" update="formTurma" process="@this"/>
+                        </div>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+

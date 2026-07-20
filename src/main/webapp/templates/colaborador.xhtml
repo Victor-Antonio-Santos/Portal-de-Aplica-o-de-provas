@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:p="http://primefaces.org/ui">
+<ui:insert name="metadata"/>
+<h:head>
+    <title>Area do Colaborador</title>
+    <h:outputStylesheet library="css" name="app.css"/>
+</h:head>
+<h:body styleClass="app-body">
+    <div class="shell">
+        <aside class="sidebar">
+            <h2>Provas Online</h2>
+            <p class="muted">Colaborador</p>
+            <h:link outcome="/pages/colaborador/minhas-provas.xhtml" value="Minhas Provas"/>
+        </aside>
+        <main class="content">
+            <header class="topbar">
+                <div>
+                    <strong>#{sessionBean.usuarioLogado.nome}</strong>
+                    <span class="muted">CPF #{sessionBean.usuarioLogado.cpf}</span>
+                </div>
+                <h:form>
+                    <p:commandButton value="Sair" action="#{sessionBean.logout}" icon="pi pi-sign-out" styleClass="p-button-secondary"/>
+                </h:form>
+            </header>
+            <p:growl id="messages" showDetail="true" autoUpdate="true"/>
+            <ui:insert name="content"/>
+        </main>
+    </div>
+</h:body>
+</html>
+

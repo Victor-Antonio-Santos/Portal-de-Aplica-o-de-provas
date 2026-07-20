@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<ui:composition template="/templates/colaborador.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewAction action="#{colaboradorProvaBean.carregarResultado}"/>
+        </f:metadata>
+    </ui:define>
+    <ui:define name="content">
+        <div class="page-title"><h1>Resultado da Prova</h1></div>
+        <div class="panel-box" rendered="#{not empty colaboradorProvaBean.provaAtual}">
+            <div class="result-banner">
+                <span class="result-badge">Prova concluida</span>
+                <h2 style="margin:12px 0 6px 0;">#{colaboradorProvaBean.provaAtual.prova.titulo}</h2>
+                <p class="muted" style="margin:0;">Sua realizacao foi registrada com sucesso.</p>
+            </div>
+            <p class="result-highlight">Nota final: #{colaboradorProvaBean.provaAtual.nota}</p>
+            <p>
+                Status:
+                <strong>#{colaboradorProvaBean.aprovado ? 'Aprovado' : 'Reprovado'}</strong>
+            </p>
+            <p>Tempo gasto: #{colaboradorProvaBean.provaAtual.tempoGasto} minuto(s)</p>
+            <p:panel rendered="#{colaboradorProvaBean.provaAtual.prova.mostrarResultado}">
+                <h3>Gabarito e respostas</h3>
+                <ui:repeat value="#{colaboradorProvaBean.provaAtual.prova.questoes}" var="questao">
+                    <div class="question-box #{colaboradorProvaBean.questaoCorreta(questao) ? 'question-correct' : 'question-incorrect'}">
+                        <div class="question-review-header">
+                            <strong>#{questao.enunciado}</strong>
+                            <span class="question-result-badge #{colaboradorProvaBean.questaoCorreta(questao) ? 'question-result-correct' : 'question-result-incorrect'}">
+                                #{colaboradorProvaBean.questaoCorreta(questao) ? 'Acertou' : 'Errou'}
+                            </span>
+                        </div>
+                        <ul class="question-review-list">
+                            <ui:repeat value="#{questao.alternativas}" var="alternativa">
+                                <li class="question-review-option #{colaboradorProvaBean.alternativaCorreta(alternativa) ? 'correct-option' : ''} #{colaboradorProvaBean.alternativaMarcadaIncorreta(questao, alternativa) ? 'incorrect-option' : ''}">
+                                    #{alternativa.texto}
+                                    #{colaboradorProvaBean.alternativaSelecionada(questao, alternativa) ? '(marcada pelo colaborador)' : ''}
+                                    #{colaboradorProvaBean.alternativaCorreta(alternativa) ? '(gabarito)' : ''}
+                                </li>
+                            </ui:repeat>
+                        </ul>
+                    </div>
+                </ui:repeat>
+            </p:panel>
+            <p:panel rendered="#{not colaboradorProvaBean.provaAtual.prova.mostrarResultado}">
+                <p>Esta prova permite somente a exibicao da nota final.</p>
+            </p:panel>
+            <div style="margin-top:16px;">
+                <h:link outcome="/pages/colaborador/minhas-provas.xhtml" value="Voltar para minhas provas" styleClass="preview-link"/>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>
+

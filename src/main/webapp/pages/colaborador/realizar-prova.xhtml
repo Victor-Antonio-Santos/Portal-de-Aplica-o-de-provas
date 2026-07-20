@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<ui:composition template="/templates/colaborador.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewAction action="#{colaboradorProvaBean.carregarRealizacao}"/>
+        </f:metadata>
+    </ui:define>
+    <ui:define name="content">
+        <div class="page-title">
+            <h1>Realizacao da Prova</h1>
+            <p class="muted">Tempo restante: #{colaboradorProvaBean.tempoRestanteMinutos} minuto(s).</p>
+        </div>
+        <div class="panel-box" rendered="#{not empty colaboradorProvaBean.provaAtual}">
+            <h:form id="formRealizacao">
+                <p:poll interval="60" listener="#{colaboradorProvaBean.verificarTempo}" update="formRealizacao"/>
+                <h2>#{colaboradorProvaBean.provaAtual.prova.titulo}</h2>
+                <p>#{colaboradorProvaBean.provaAtual.prova.descricao}</p>
+                <h:panelGroup rendered="#{colaboradorProvaBean.realizacaoBloqueada}">
+                    <div class="result-banner" style="margin-bottom:16px;">
+                        <span class="result-badge" style="background:#b91c1c;">Prova expirada</span>
+                        <p style="margin:12px 0 0 0;">O prazo definido pelo treinador foi encerrado. Esta prova nao pode mais ser iniciada nem respondida.</p>
+                    </div>
+                </h:panelGroup>
+                <div style="margin-bottom:16px;">
+                    <p:commandButton value="Iniciar prova" actionListener="#{colaboradorProvaBean.iniciar}" update="formRealizacao" process="@this"
+                                     rendered="#{colaboradorProvaBean.provaAtual.status eq 'PENDENTE' and not colaboradorProvaBean.realizacaoBloqueada}"/>
+                </div>
+                <ui:repeat value="#{colaboradorProvaBean.provaAtual.prova.questoes}" var="questao" rendered="#{not colaboradorProvaBean.realizacaoBloqueada}">
+                    <div class="question-box #{colaboradorProvaBean.provaAtual.finalizada ? (colaboradorProvaBean.questaoCorreta(questao) ? 'question-correct' : 'question-incorrect') : ''}">
+                        <div class="question-review-header">
+                            <h3>#{questao.ordemExibicao}. #{questao.enunciado}</h3>
+                            <h:panelGroup rendered="#{colaboradorProvaBean.provaAtual.finalizada}" layout="block">
+                                <span class="question-result-badge #{colaboradorProvaBean.questaoCorreta(questao) ? 'question-result-correct' : 'question-result-incorrect'}">
+                                    #{colaboradorProvaBean.questaoCorreta(questao) ? 'Acertou' : 'Errou'}
+                                </span>
+                            </h:panelGroup>
+                        </div>
+                        <p:selectManyCheckbox value="#{colaboradorProvaBean.respostasMultiplas[questao.id]}" layout="pageDirection"
+                                              disabled="#{colaboradorProvaBean.provaAtual.finalizada}"
+                                              rendered="#{colaboradorProvaBean.isQuestaoMultipla(questao)}">
+                            <f:selectItems value="#{questao.alternativas}" var="alternativa" itemLabel="#{alternativa.texto}" itemValue="#{alternativa.id}"/>
+                        </p:selectManyCheckbox>
+                        <p:selectOneRadio value="#{colaboradorProvaBean.respostasUnicas[questao.id]}" layout="pageDirection"
+                                          disabled="#{colaboradorProvaBean.provaAtual.finalizada}"
+                                          rendered="#{not colaboradorProvaBean.isQuestaoMultipla(questao)}">
+                            <f:selectItems value="#{questao.alternativas}" var="alternativa" itemLabel="#{alternativa.texto}" itemValue="#{alternativa.id}"/>
+                        </p:selectOneRadio>
+                        <ui:fragment rendered="#{colaboradorProvaBean.provaAtual.finalizada}">
+                            <ul class="question-review-list">
+                                <ui:repeat value="#{questao.alternativas}" var="alternativa">
+                                    <li class="question-review-option #{colaboradorProvaBean.alternativaCorreta(alternativa) ? 'correct-option' : ''} #{colaboradorProvaBean.alternativaMarcadaIncorreta(questao, alternativa) ? 'incorrect-option' : ''}">
+                                        #{alternativa.texto}
+                                        #{colaboradorProvaBean.alternativaSelecionada(questao, alternativa) ? '(marcada pelo colaborador)' : ''}
+                                        #{colaboradorProvaBean.alternativaCorreta(alternativa) ? '(gabarito)' : ''}
+                                    </li>
+                                </ui:repeat>
+                            </ul>
+                        </ui:fragment>
+                    </div>
+                </ui:repeat>
+                <div style="display:flex; gap:12px;">
+                    <p:commandButton value="Finalizar prova" actionListener="#{colaboradorProvaBean.finalizar}" ajax="false" process="@form"
+                                     rendered="#{colaboradorProvaBean.provaAtual.status ne 'FINALIZADA' and not colaboradorProvaBean.realizacaoBloqueada}" styleClass="p-button-danger"/>
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+

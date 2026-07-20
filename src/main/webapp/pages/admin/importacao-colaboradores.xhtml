@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<ui:composition template="/templates/admin.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+        <div class="page-title">
+            <h1>Importacao Massiva de Colaboradores</h1>
+            <p class="muted">Cadastre uma lista inteira de colaboradores de uma vez usando turmas ja criadas pelo treinador.</p>
+        </div>
+        <div class="panel-box">
+            <h:form id="formImportacao" enctype="multipart/form-data">
+                <p:messages id="msgs" showDetail="true" closable="true" autoUpdate="true"/>
+
+                <p:panel style="margin-bottom:18px;">
+                    <strong>Formato esperado da planilha</strong>
+                    <br/>
+                    <span class="muted">Use a primeira aba da planilha com cabecalho na linha 1.</span>
+                    <br/>
+                    <span class="muted">Coluna A: Nome | Coluna B: CPF | Coluna C: E-mail (opcional) | Coluna D: Senha (opcional) | Coluna E: Turma</span>
+                    <br/>
+                    <span class="muted">Se a coluna Senha vier vazia, a senha padrao informada abaixo sera aplicada. Se a coluna Turma vier vazia, a turma padrao da tela sera usada.</span>
+                    <div class="action-buttons" style="margin-top:14px;">
+                        <p:commandButton value="Baixar modelo XLS" ajax="false" icon="pi pi-download" styleClass="p-button-secondary">
+                            <p:fileDownload value="#{importacaoColaboradorBean.modeloPlanilha}"/>
+                        </p:commandButton>
+                    </div>
+                </p:panel>
+
+                <div class="import-form-grid">
+                    <div class="import-field">
+                        <p:outputLabel for="turma" value="Turma padrao"/>
+                        <p:selectOneMenu id="turma" value="#{importacaoColaboradorBean.turmaId}" styleClass="full-width import-field-input">
+                            <f:selectItem itemLabel="Usar turma informada na planilha" itemValue="#{null}"/>
+                            <f:selectItems value="#{importacaoColaboradorBean.turmas}" var="turma" itemLabel="#{turma.nome}" itemValue="#{turma.id}"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="import-field">
+                        <p:outputLabel for="senhaPadrao" value="Senha padrao"/>
+                        <p:password id="senhaPadrao" value="#{importacaoColaboradorBean.senhaPadrao}" styleClass="full-width import-field-input" feedback="false"/>
+                    </div>
+                    <div class="import-field import-field-full">
+                        <p:outputLabel for="arquivo" value="Planilha XLS/XLSX"/>
+                        <div class="import-upload-box">
+                            <p:fileUpload id="arquivo" value="#{importacaoColaboradorBean.arquivo}" mode="simple" skinSimple="true"
+                                          allowTypes="/(\.|\/)(xls|xlsx)$/" label="Selecionar planilha" styleClass="import-upload-input"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons import-actions">
+                    <p:commandButton value="Importar colaboradores" actionListener="#{importacaoColaboradorBean.importar}"
+                                     process="@form" ajax="false" icon="pi pi-upload"/>
+                </div>
+
+                <h:panelGroup rendered="#{importacaoColaboradorBean.temResultado}">
+                    <p:separator/>
+                    <div class="grid-cards import-summary-grid">
+                        <div class="card-indicator">
+                            <span class="muted">Total processado</span>
+                            <strong>#{importacaoColaboradorBean.resultado.totalProcessado}</strong>
+                        </div>
+                        <div class="card-indicator">
+                            <span class="muted">Importados/atualizados</span>
+                            <strong>#{importacaoColaboradorBean.resultado.totalSucesso}</strong>
+                        </div>
+                        <div class="card-indicator">
+                            <span class="muted">Com erro</span>
+                            <strong>#{importacaoColaboradorBean.resultado.totalErro}</strong>
+                        </div>
+                    </div>
+
+                    <p:dataTable value="#{importacaoColaboradorBean.resultado.linhas}" var="linha" paginator="true" rows="10" reflow="true">
+                        <p:column headerText="Linha">#{linha.numeroLinha}</p:column>
+                        <p:column headerText="Nome">#{linha.nome}</p:column>
+                        <p:column headerText="CPF">#{linha.cpf}</p:column>
+                        <p:column headerText="Status">
+                            <span class="#{linha.sucesso ? 'import-status import-status-success' : 'import-status import-status-error'}">
+                                #{linha.sucesso ? 'Sucesso' : 'Erro'}
+                            </span>
+                        </p:column>
+                        <p:column headerText="Detalhe">#{linha.mensagem}</p:column>
+                    </p:dataTable>
+                </h:panelGroup>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+

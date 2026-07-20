@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<ui:composition template="/templates/admin.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+        <div class="page-title">
+            <h1>Cadastro de Colaboradores</h1>
+        </div>
+        <div class="panel-box">
+            <h:form id="formColaborador">
+                <p:messages id="msgs" showDetail="true" closable="true"/>
+                <div class="form-grid">
+                    <div>
+                        <p:outputLabel for="nome" value="Nome completo"/>
+                        <p:inputText id="nome" value="#{colaboradorCadastroBean.colaborador.nome}" styleClass="full-width" required="true"/>
+                    </div>
+                    <div>
+                        <p:outputLabel for="cpf" value="CPF"/>
+                        <p:inputMask id="cpf" mask="999.999.999-99" value="#{colaboradorCadastroBean.colaborador.cpf}" styleClass="full-width" required="true"/>
+                    </div>
+                    <div>
+                        <p:outputLabel for="email" value="E-mail"/>
+                        <p:inputText id="email" value="#{colaboradorCadastroBean.colaborador.email}" styleClass="full-width"/>
+                    </div>
+                    <div>
+                        <p:outputLabel for="turma" value="Turma"/>
+                        <p:selectOneMenu id="turma" value="#{colaboradorCadastroBean.turmaId}" styleClass="full-width" required="true">
+                            <f:selectItem itemLabel="Selecione uma turma" itemValue="#{null}"/>
+                            <f:selectItems value="#{colaboradorCadastroBean.turmas}" var="turma" itemLabel="#{turma.nome}" itemValue="#{turma.id}"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div>
+                        <p:outputLabel for="senha" value="Senha"/>
+                        <p:password id="senha" value="#{colaboradorCadastroBean.senha}" styleClass="full-width" feedback="false"
+                                    required="#{empty colaboradorCadastroBean.colaborador.id}"/>
+                    </div>
+                    <div>
+                        <p:outputLabel for="status" value="Status"/>
+                        <p:selectOneMenu id="status" value="#{colaboradorCadastroBean.colaborador.status}" styleClass="full-width">
+                            <f:selectItems value="#{colaboradorCadastroBean.statusDisponiveis}" var="status" itemLabel="#{status}" itemValue="#{status}"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div>
+                        <p:outputLabel for="responsavel" value="Treinador responsavel"/>
+                        <p:inputText id="responsavel" value="#{colaboradorCadastroBean.colaborador.aplicadorResponsavel != null ? colaboradorCadastroBean.colaborador.aplicadorResponsavel.nome : ''}" styleClass="full-width" readonly="true"/>
+                    </div>
+                </div>
+                <div style="margin-top:20px;">
+                    <p:commandButton value="Salvar" actionListener="#{colaboradorCadastroBean.salvar}" update="formColaborador :messages" icon="pi pi-save"/>
+                    <p:commandButton value="Novo" actionListener="#{colaboradorCadastroBean.novo}" update="formColaborador" process="@this" styleClass="p-button-secondary"/>
+                </div>
+                <p:separator/>
+                <p:dataTable value="#{colaboradorCadastroBean.colaboradores}" var="colab" paginator="true" rows="8" reflow="true">
+                    <p:column headerText="Nome" filterBy="#{colab.nome}" filterMatchMode="contains">#{colab.nome}</p:column>
+                    <p:column headerText="CPF" filterBy="#{colab.cpf}" filterMatchMode="contains">#{colab.cpf}</p:column>
+                    <p:column headerText="E-mail">#{colab.email}</p:column>
+                    <p:column headerText="Turma">#{colab.turma != null ? colab.turma.nome : '-'}</p:column>
+                    <p:column headerText="Treinador">#{colab.aplicadorResponsavel != null ? colab.aplicadorResponsavel.nome : '-'}</p:column>
+                    <p:column headerText="Status">#{colab.status}</p:column>
+                    <p:column headerText="Acoes">
+                        <p:commandButton value="Editar" actionListener="#{colaboradorCadastroBean.editar(colab)}" update="formColaborador" process="@this" styleClass="p-button-text"/>
+                        <p:commandButton value="Excluir" actionListener="#{colaboradorCadastroBean.excluir(colab.id)}" update="formColaborador" process="@this" styleClass="p-button-danger p-button-text">
+                            <p:confirm header="Confirmar" message="Deseja excluir o colaborador?" icon="pi pi-exclamation-triangle"/>
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes"/>
+                    <p:commandButton value="Nao" type="button" styleClass="ui-confirmdialog-no p-button-secondary"/>
+                </p:confirmDialog>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+

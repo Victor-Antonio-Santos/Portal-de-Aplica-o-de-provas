@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<ui:composition template="/templates/admin.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+        <div class="page-title"><h1>Cadastro de Provas</h1></div>
+        <div class="panel-box">
+            <h:form id="formProva">
+                <p:messages id="msgs" showDetail="true" closable="true"/>
+                <div class="form-grid">
+                    <div><p:outputLabel for="titulo" value="Titulo"/><p:inputText id="titulo" value="#{provaCadastroBean.prova.titulo}" styleClass="full-width" required="true"/></div>
+                    <div><p:outputLabel for="tempo" value="Tempo (minutos)"/><p:inputNumber id="tempo" value="#{provaCadastroBean.prova.tempoMinutos}" decimalPlaces="0" styleClass="full-width"/></div>
+                    <div><p:outputLabel for="nota" value="Nota minima"/><p:inputNumber id="nota" value="#{provaCadastroBean.prova.notaMinima}" decimalPlaces="2" styleClass="full-width"/></div>
+                    <div>
+                        <p:outputLabel for="status" value="Status"/>
+                        <p:selectOneMenu id="status" value="#{provaCadastroBean.prova.status}" styleClass="full-width">
+                            <f:selectItems value="#{provaCadastroBean.statusDisponiveis}" var="status" itemLabel="#{status}" itemValue="#{status}"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div style="grid-column:1/-1;">
+                        <p:outputLabel for="descricao" value="Descricao"/>
+                        <p:inputTextarea id="descricao" value="#{provaCadastroBean.prova.descricao}" rows="4" autoResize="false" styleClass="full-width"/>
+                    </div>
+                    <div><p:selectBooleanCheckbox id="mostrar" value="#{provaCadastroBean.prova.mostrarResultado}"/><p:outputLabel for="mostrar" value="Permitir visualizacao do resultado ao final"/></div>
+                </div>
+                <p:panel style="margin-top:16px;">
+                    <strong>Modelos de questao disponiveis para esta prova</strong>
+                    <br/>
+                    <span class="muted">Escolha unica: uma resposta correta.</span>
+                    <br/>
+                    <span class="muted">Multipla escolha: uma ou mais respostas corretas.</span>
+                    <br/>
+                    <span class="muted">Verdadeiro/Falso: duas alternativas fixas.</span>
+                    <br/>
+                    <div class="action-buttons" style="margin-top:12px;">
+                        <h:link outcome="/pages/admin/cadastro-questoes.xhtml" value="Ir para montagem das questoes" styleClass="button-link button-primary"
+                                rendered="#{not empty provaCadastroBean.prova.id}">
+                            <f:param name="provaId" value="#{provaCadastroBean.prova.id}"/>
+                        </h:link>
+                        <h:link outcome="/pages/admin/cadastro-questoes.xhtml" value="Ir para montagem das questoes" styleClass="button-link button-primary"
+                                rendered="#{empty provaCadastroBean.prova.id}"/>
+                    </div>
+                    <h:panelGroup rendered="#{not empty provaCadastroBean.prova.id}">
+                        <div class="action-buttons" style="margin-top:10px;">
+                            <h:link outcome="/pages/admin/cadastro-questoes.xhtml" value="Editar questoes desta prova" styleClass="button-link button-primary">
+                                <f:param name="provaId" value="#{provaCadastroBean.prova.id}"/>
+                            </h:link>
+                            <h:link outcome="/pages/admin/visualizar-prova.xhtml" value="Visualizar prova atual" styleClass="button-link button-secondary">
+                                <f:param name="id" value="#{provaCadastroBean.prova.id}"/>
+                            </h:link>
+                        </div>
+                        <p class="muted" style="margin-top:10px;">Use a tela de questoes para editar enunciados, alternativas, remover alternativas e excluir questoes da prova.</p>
+                    </h:panelGroup>
+                </p:panel>
+                <div style="margin-top:20px;">
+                    <p:commandButton value="Salvar" actionListener="#{provaCadastroBean.salvar}" update="formProva :messages" icon="pi pi-save"/>
+                    <p:commandButton value="Novo" actionListener="#{provaCadastroBean.novo}" update="formProva" process="@this" styleClass="p-button-secondary"/>
+                </div>
+                <p:separator/>
+                <p:dataTable value="#{provaCadastroBean.provas}" var="prova" paginator="true" rows="8">
+                    <p:column headerText="Titulo">#{prova.titulo}</p:column>
+                    <p:column headerText="Questoes">#{prova.quantidadeQuestoes}</p:column>
+                    <p:column headerText="Nota minima">#{prova.notaMinima}</p:column>
+                    <p:column headerText="Status">#{prova.status}</p:column>
+                    <p:column headerText="Acoes">
+                        <div class="action-buttons table-actions">
+                            <p:commandButton value="Editar" actionListener="#{provaCadastroBean.editar(prova)}" update="formProva" process="@this" icon="pi pi-pencil"
+                                             styleClass="table-action-button table-action-neutral"/>
+                            <h:link outcome="/pages/admin/cadastro-questoes.xhtml" value="Questoes" styleClass="button-link table-action-link-button table-action-neutral">
+                                <f:param name="provaId" value="#{prova.id}"/>
+                            </h:link>
+                            <h:link outcome="/pages/admin/visualizar-prova.xhtml" value="Visualizar" styleClass="button-link table-action-link-button table-action-neutral">
+                                <f:param name="id" value="#{prova.id}"/>
+                            </h:link>
+                            <p:commandButton value="Excluir" actionListener="#{provaCadastroBean.excluir(prova.id)}" update="formProva :messages" process="@this" ajax="false" icon="pi pi-trash"
+                                             styleClass="table-action-button table-action-danger"
+                                             onclick="return confirm('Deseja realmente excluir esta prova?');"/>
+                        </div>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<ui:composition template="/templates/admin.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+        <div class="page-title"><h1>Relatorios e Acompanhamento</h1></div>
+        <div class="panel-box">
+            <h:form id="formRelatorio">
+                <div class="form-grid">
+                    <div><p:outputLabel for="texto" value="Nome ou CPF"/><p:inputText id="texto" value="#{relatorioBean.filtroTexto}" styleClass="full-width"/></div>
+                    <div>
+                        <p:outputLabel for="status" value="Status"/>
+                        <p:selectOneMenu id="status" value="#{relatorioBean.status}" styleClass="full-width">
+                            <f:selectItem itemLabel="Todos" itemValue=""/>
+                            <f:selectItems value="#{relatorioBean.statusDisponiveis}" var="status" itemLabel="#{status}" itemValue="#{status}"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div>
+                        <p:outputLabel for="turma" value="Turma"/>
+                        <p:selectOneMenu id="turma" value="#{relatorioBean.turmaId}" styleClass="full-width">
+                            <f:selectItem itemLabel="Todas as turmas" itemValue="#{null}"/>
+                            <f:selectItems value="#{relatorioBean.turmas}" var="turma" itemLabel="#{turma.nome}" itemValue="#{turma.id}"/>
+                        </p:selectOneMenu>
+                    </div>
+                </div>
+                <div style="margin-top:18px;">
+                    <p:commandButton value="Pesquisar" actionListener="#{relatorioBean.pesquisar}" update="formRelatorio" icon="pi pi-search"/>
+                </div>
+                <p:separator/>
+                <p:dataTable value="#{relatorioBean.registros}" var="registro" paginator="true" rows="10" reflow="true">
+                    <p:column headerText="Colaborador">#{registro.colaborador.nome}</p:column>
+                    <p:column headerText="CPF">#{registro.colaborador.cpf}</p:column>
+                    <p:column headerText="Turma">#{registro.colaborador.turma != null ? registro.colaborador.turma.nome : '-'}</p:column>
+                    <p:column headerText="Prova">#{registro.prova.titulo}</p:column>
+                    <p:column headerText="Status">#{registro.status}</p:column>
+                    <p:column headerText="Nota">#{registro.nota}</p:column>
+                    <p:column headerText="Tentativa">#{registro.tentativa}/#{registro.tentativasPermitidas}</p:column>
+                    <p:column headerText="Acoes">
+                        <div class="action-buttons">
+                            <p:commandButton value="Excluir" actionListener="#{relatorioBean.excluirEnvio(registro.id)}"
+                                             update="formRelatorio :messages" process="@this" ajax="false" icon="pi pi-trash" styleClass="p-button-danger"
+                                             onclick="return confirm('Deseja realmente excluir este envio de prova?');"/>
+                        </div>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+

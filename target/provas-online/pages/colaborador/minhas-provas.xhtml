@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<ui:composition template="/templates/colaborador.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewAction action="#{colaboradorProvaBean.carregarMinhasProvas}"/>
+        </f:metadata>
+    </ui:define>
+    <ui:define name="content">
+        <div class="page-title">
+            <h1>Minhas Provas</h1>
+            <p class="muted">Acompanhe pendencias, inicie realizacoes e consulte resultados.</p>
+        </div>
+        <div class="panel-box">
+            <h:form>
+                <p:dataTable value="#{colaboradorProvaBean.minhasProvas}" var="prova" paginator="true" rows="10" reflow="true">
+                    <p:column headerText="Prova">#{prova.prova.titulo}</p:column>
+                    <p:column headerText="Status">#{prova.status}</p:column>
+                    <p:column headerText="Nota">#{prova.nota}</p:column>
+                    <p:column headerText="Tentativa">#{prova.tentativa}/#{prova.tentativasPermitidas}</p:column>
+                    <p:column headerText="Limite">
+                        <h:outputText value="#{prova.dataLimite}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Acao">
+                        <h:link outcome="/pages/colaborador/realizar-prova.xhtml" value="Abrir">
+                            <f:param name="id" value="#{prova.id}"/>
+                        </h:link>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+

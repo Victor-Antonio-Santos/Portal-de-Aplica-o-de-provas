@@ -1,0 +1,222 @@
+Calling "E:\wildfly-14.0.0.Final\bin\standalone.conf.bat"
+Setting JAVA property to "C:\Users\va176\.jdks\corretto-1.8.0_482\bin\java"
+===============================================================================
+
+  JBoss Bootstrap Environment
+
+  JBOSS_HOME: "E:\wildfly-14.0.0.Final"
+
+  JAVA: "C:\Users\va176\.jdks\corretto-1.8.0_482\bin\java"
+
+  JAVA_OPTS: "-Dprogram.name=standalone.bat -Xms64M -Xmx512M -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman "
+
+===============================================================================
+
+09:40:02,517 INFO  [org.jboss.modules] (main) JBoss Modules version 1.8.6.Final
+09:40:02,840 INFO  [org.jboss.msc] (main) JBoss MSC version 1.4.3.Final
+09:40:02,849 INFO  [org.jboss.threads] (main) JBoss Threads version 2.3.2.Final
+09:40:02,946 INFO  [org.jboss.as] (MSC service thread 1-2) WFLYSRV0049: WildFly Full 14.0.0.Final (WildFly Core 6.0.1.Final) starting
+09:40:03,547 INFO  [org.wildfly.security] (ServerService Thread Pool -- 27) ELY00001: WildFly Elytron version 1.6.0.Final
+09:40:03,882 INFO  [org.jboss.as.controller.management-deprecated] (Controller Boot Thread) WFLYCTL0028: Attribute 'security-realm' in the resource at address '/core-service=management/management-interface=http-interface' is deprecated, and may be removed in a future version. See the attribute description in the output of the read-resource-description operation to learn more about the deprecation.
+09:40:03,899 INFO  [org.jboss.as.controller.management-deprecated] (ServerService Thread Pool -- 20) WFLYCTL0028: Attribute 'security-realm' in the resource at address '/subsystem=undertow/server=default-server/https-listener=https' is deprecated, and may be removed in a future version. See the attribute description in the output of the read-resource-description operation to learn more about the deprecation.
+09:40:03,958 INFO  [org.jboss.as.server] (Controller Boot Thread) WFLYSRV0039: Creating http management service using socket-binding (management-http)
+09:40:03,969 INFO  [org.xnio] (MSC service thread 1-7) XNIO version 3.6.5.Final
+09:40:03,976 INFO  [org.xnio.nio] (MSC service thread 1-7) XNIO NIO Implementation Version 3.6.5.Final
+09:40:04,029 INFO  [org.jboss.as.clustering.infinispan] (ServerService Thread Pool -- 48) WFLYCLINF0001: Activating Infinispan subsystem.
+09:40:04,031 INFO  [org.jboss.as.connector.subsystems.datasources] (ServerService Thread Pool -- 41) WFLYJCA0004: Deploying JDBC-compliant driver class org.h2.Driver (version 1.4)
+09:40:04,041 INFO  [org.jboss.as.jaxrs] (ServerService Thread Pool -- 50) WFLYRS0016: RESTEasy version 3.6.1.Final
+09:40:04,053 INFO  [org.wildfly.extension.microprofile.config.smallrye._private] (ServerService Thread Pool -- 57) WFLYCONF0001: Activating WildFly MicroProfile Config Subsystem
+09:40:04,057 INFO  [org.wildfly.extension.microprofile.opentracing] (ServerService Thread Pool -- 59) WFLYTRACEXT0001: Activating MicroProfile OpenTracing Subsystem
+09:40:04,062 INFO  [org.wildfly.extension.microprofile.health.smallrye] (ServerService Thread Pool -- 58) WFLYHEALTH0001: Activating Eclipse MicroProfile Health Subsystem
+09:40:04,062 INFO  [org.jboss.as.webservices] (ServerService Thread Pool -- 70) WFLYWS0002: Activating WebServices Extension
+09:40:04,067 WARN  [org.jboss.as.txn] (ServerService Thread Pool -- 68) WFLYTX0013: The node-identifier attribute on the /subsystem=transactions is set to the default value. This is a danger for environments running multiple servers. Please make sure the attribute value is unique.
+09:40:04,070 INFO  [org.jboss.as.naming] (ServerService Thread Pool -- 60) WFLYNAM0001: Activating Naming Subsystem
+09:40:04,078 INFO  [org.jboss.as.security] (ServerService Thread Pool -- 66) WFLYSEC0002: Activating Security Subsystem
+09:40:04,091 INFO  [org.jboss.as.jsf] (ServerService Thread Pool -- 55) WFLYJSF0007: Activated the following JSF Implementations: [main]
+09:40:04,095 INFO  [org.jboss.as.connector] (MSC service thread 1-1) WFLYJCA0009: Starting JCA Subsystem (WildFly/IronJacamar 1.4.11.Final)
+09:40:04,096 INFO  [org.jboss.as.mail.extension] (MSC service thread 1-5) WFLYMAIL0002: Unbound mail session [java:jboss/mail/Default]
+09:40:04,102 INFO  [org.jboss.as.security] (MSC service thread 1-6) WFLYSEC0001: Current PicketBox version=5.0.3.Final
+09:40:04,120 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-4) WFLYJCA0018: Started Driver service with driver-name = h2
+09:40:04,137 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-5) WFLYUT0003: Undertow 2.0.13.Final starting
+09:40:04,151 INFO  [org.jboss.as.naming] (MSC service thread 1-3) WFLYNAM0003: Starting Naming Service
+09:40:04,153 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-5) WFLYJCA0010: Unbound data source [java:jboss/datasources/ExampleDS]
+09:40:04,155 INFO  [org.jboss.as.mail.extension] (MSC service thread 1-5) WFLYMAIL0001: Bound mail session [java:jboss/mail/Default]
+09:40:04,388 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 69) WFLYUT0014: Creating file handler for path 'E:\wildfly-14.0.0.Final/welcome-content' with options [directory-listing: 'false', follow-symlink: 'false', case-sensitive: 'true', safe-symlink-paths: '[]']
+09:40:04,512 INFO  [org.wildfly.extension.io] (ServerService Thread Pool -- 49) WFLYIO001: Worker 'default' has auto-configured to 12 core threads with 96 task threads based on your 6 available processors
+09:40:04,526 INFO  [org.jboss.as.ejb3] (MSC service thread 1-3) WFLYEJB0482: Strict pool mdb-strict-max-pool is using a max instance size of 24 (per class), which is derived from the number of CPUs on this host.
+09:40:04,526 INFO  [org.jboss.as.ejb3] (MSC service thread 1-5) WFLYEJB0481: Strict pool slsb-strict-max-pool is using a max instance size of 96 (per class), which is derived from thread worker pool sizing.
+09:40:04,547 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-3) WFLYUT0012: Started server default-server.
+09:40:04,551 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-4) WFLYUT0018: Host default-host starting
+09:40:04,557 INFO  [org.jboss.as.patching] (MSC service thread 1-5) WFLYPAT0050: WildFly Full cumulative patch ID is: base, one-off patches include: none
+09:40:04,561 INFO  [org.jboss.remoting] (MSC service thread 1-7) JBoss Remoting version 5.0.8.Final
+09:40:04,582 WARN  [org.jboss.as.domain.management.security] (MSC service thread 1-8) WFLYDM0111: Keystore E:\wildfly-14.0.0.Final\standalone\configuration\application.keystore not found, it will be auto generated on first use with a self signed certificate for host localhost
+09:40:04,590 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-3) WFLYUT0006: Undertow HTTP listener default listening on 127.0.0.1:8080
+09:40:04,591 INFO  [org.jboss.as.server.deployment.scanner] (MSC service thread 1-6) WFLYDS0013: Started FileSystemDeploymentService for directory E:\wildfly-14.0.0.Final\standalone\deployments
+09:40:04,605 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-1) WFLYSRV0027: Starting deployment of "gip.war" (runtime-name: "gip.war")
+09:40:04,657 INFO  [org.jboss.as.ejb3] (MSC service thread 1-5) WFLYEJB0493: EJB subsystem suspension complete
+09:40:04,677 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-2) WFLYUT0006: Undertow HTTPS listener https listening on 127.0.0.1:8443
+09:40:04,713 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-6) WFLYJCA0001: Bound data source [java:jboss/datasources/ExampleDS]
+09:40:04,737 INFO  [org.jboss.ws.common.management] (MSC service thread 1-3) JBWS022052: Starting JBossWS 5.2.3.Final (Apache CXF 3.2.5.jbossorg-1) 
+09:40:19,427 INFO  [org.jboss.weld.deployer] (MSC service thread 1-2) WFLYWELD0003: Processing weld deployment gip.war
+09:40:19,528 INFO  [org.hibernate.validator.internal.util.Version] (MSC service thread 1-2) HV000001: Hibernate Validator 6.0.13.Final
+09:40:19,935 INFO  [org.infinispan.factories.GlobalComponentRegistry] (MSC service thread 1-8) ISPN000128: Infinispan version: Infinispan 'Estrella Galicia' 9.3.1.Final
+09:40:20,019 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-3) WFLYJCA0005: Deploying non-JDBC-compliant driver class net.sourceforge.jtds.jdbc.Driver (version 1.3)
+09:40:20,023 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-3) WFLYJCA0005: Deploying non-JDBC-compliant driver class com.mysql.cj.jdbc.Driver (version 8.0)
+09:40:20,043 INFO  [org.jboss.weld.Version] (MSC service thread 1-3) WELD-000900: 3.0.5 (Final)
+09:40:20,090 INFO  [org.jboss.as.clustering.infinispan] (ServerService Thread Pool -- 73) WFLYCLINF0002: Started client-mappings cache from ejb container
+09:40:20,106 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-5) WFLYJCA0018: Started Driver service with driver-name = gip.war_net.sourceforge.jtds.jdbc.Driver_1_3
+09:40:20,107 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-2) WFLYJCA0018: Started Driver service with driver-name = gip.war_com.mysql.cj.jdbc.Driver_8_0
+09:40:20,342 WARN  [org.jboss.weld.Bootstrap] (MSC service thread 1-2) WELD-000146: BeforeBeanDiscovery.addAnnotatedType(AnnotatedType<?>) used for class com.sun.faces.flow.FlowDiscoveryCDIHelper is deprecated from CDI 1.1!
+09:40:21,391 INFO  [javax.enterprise.resource.webcontainer.jsf.config] (ServerService Thread Pool -- 121) Inicializando Mojarra 2.3.5.SP2 para o contexto '/gip'
+09:40:38,646 INFO  [javax.enterprise.resource.webcontainer.jsf.config] (ServerService Thread Pool -- 121) Monitoring file:/E:/wildfly-14.0.0.Final/standalone/tmp/vfs/temp/temp7c6583293b6d6d80/gip.war-829ea59f418e22d3/WEB-INF/faces-config.xml for modifications
+09:40:38,717 INFO  [org.primefaces.webapp.PostConstructApplicationEventListener] (ServerService Thread Pool -- 121) Running on PrimeFaces 7.0
+09:40:38,747 WARN  [io.jaegertracing.internal.senders.SenderResolver] (ServerService Thread Pool -- 121) No suitable sender found. Using NoopSender, meaning that data will not be sent anywhere!
+09:40:38,780 INFO  [io.jaegertracing.Configuration] (ServerService Thread Pool -- 121) Initialized tracer=JaegerTracer(version=Java-0.30.6, serviceName=gip.war, reporter=RemoteReporter(sender=NoopSender(), closeEnqueueTimeout=1000), sampler=RemoteControlledSampler(maxOperations=2000, manager=HttpSamplingManager(hostPort=localhost:5778), sampler=ProbabilisticSampler(tags={sampler.type=probabilistic, sampler.param=0.001})), tags={hostname=DESKTOP-1MTL0U4, jaeger.version=Java-0.30.6, ip=10.175.21.15}, zipkinSharedRpcSpan=false, expandExceptionLogs=false)
+09:40:38,808 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 121) WFLYUT0021: Registered web context: '/gip' for server 'default-server'
+09:40:38,820 INFO  [org.jboss.as.server] (Controller Boot Thread) WFLYSRV0010: Deployed "gip.war" (runtime-name : "gip.war")
+09:40:38,857 INFO  [org.jboss.as.server] (Controller Boot Thread) WFLYSRV0212: Resuming server
+09:40:38,860 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0060: Http management interface listening on http://127.0.0.1:9990/management
+09:40:38,860 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0051: Admin console listening on http://127.0.0.1:9990
+09:40:38,860 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0025: WildFly Full 14.0.0.Final (WildFly Core 6.0.1.Final) started in 36637ms - Started 2740 of 2923 services (326 services are lazy, passive or on-demand)
+09:42:56,266 INFO  [org.jboss.as.repository] (management-handler-thread - 1) WFLYDR0001: Content added at location E:\wildfly-14.0.0.Final\standalone\data\content\c3\84fe0e4e14ec8391105548e88baac0585aecc1\content
+09:42:56,274 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-4) WFLYSRV0027: Starting deployment of "PROVAS~1.WAR" (runtime-name: "PROVAS~1.WAR")
+09:43:03,162 INFO  [org.jboss.as.jpa] (MSC service thread 1-8) WFLYJPA0002: Read persistence.xml for provasPU
+09:43:03,325 INFO  [org.jboss.as.jpa] (ServerService Thread Pool -- 121) WFLYJPA0010: Starting Persistence Unit (phase 1 of 2) Service 'PROVAS~1.WAR#provasPU'
+09:43:03,360 INFO  [org.hibernate.jpa.internal.util.LogHelper] (ServerService Thread Pool -- 121) HHH000204: Processing PersistenceUnitInfo [
+	name: provasPU
+	...]
+09:43:03,412 INFO  [org.jboss.weld.deployer] (MSC service thread 1-1) WFLYWELD0003: Processing weld deployment PROVAS~1.WAR
+09:43:03,455 INFO  [org.hibernate.Version] (ServerService Thread Pool -- 121) HHH000412: Hibernate Core {5.3.6.Final}
+09:43:03,461 INFO  [org.hibernate.cfg.Environment] (ServerService Thread Pool -- 121) HHH000206: hibernate.properties not found
+09:43:03,660 INFO  [org.hibernate.annotations.common.Version] (ServerService Thread Pool -- 121) HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+09:43:03,908 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-1) WFLYJCA0004: Deploying JDBC-compliant driver class org.h2.Driver (version 2.2)
+09:43:03,913 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-1) WFLYJCA0005: Deploying non-JDBC-compliant driver class com.mysql.cj.jdbc.Driver (version 8.0)
+09:43:04,000 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-6) WFLYJCA0018: Started Driver service with driver-name = PROVAS~1.WAR_org.h2.Driver_2_2
+09:43:04,004 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-2) WFLYJCA0018: Started Driver service with driver-name = PROVAS~1.WAR_com.mysql.cj.jdbc.Driver_8_0
+09:43:04,073 INFO  [org.jboss.as.jpa] (ServerService Thread Pool -- 121) WFLYJPA0010: Starting Persistence Unit (phase 2 of 2) Service 'PROVAS~1.WAR#provasPU'
+09:43:04,476 INFO  [org.hibernate.dialect.Dialect] (ServerService Thread Pool -- 121) HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+09:43:04,566 INFO  [org.hibernate.envers.boot.internal.EnversServiceImpl] (ServerService Thread Pool -- 121) Envers integration enabled? : true
+09:43:04,824 ERROR [org.jboss.msc.service.fail] (ServerService Thread Pool -- 121) MSC000001: Failed to start service jboss.persistenceunit."PROVAS~1.WAR#provasPU": org.jboss.msc.service.StartException in service jboss.persistenceunit."PROVAS~1.WAR#provasPU": java.lang.ClassCastException: org.dom4j.DocumentFactory cannot be cast to org.dom4j.DocumentFactory
+	at org.jboss.as.jpa.service.PersistenceUnitServiceImpl$1$1.run(PersistenceUnitServiceImpl.java:195)
+	at org.jboss.as.jpa.service.PersistenceUnitServiceImpl$1$1.run(PersistenceUnitServiceImpl.java:125)
+	at org.wildfly.security.manager.WildFlySecurityManager.doChecked(WildFlySecurityManager.java:650)
+	at org.jboss.as.jpa.service.PersistenceUnitServiceImpl$1.run(PersistenceUnitServiceImpl.java:209)
+	at org.jboss.threads.ContextClassLoaderSavingRunnable.run(ContextClassLoaderSavingRunnable.java:35)
+	at org.jboss.threads.EnhancedQueueExecutor.safeRun(EnhancedQueueExecutor.java:1985)
+	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.doRunTask(EnhancedQueueExecutor.java:1487)
+	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1378)
+	at java.lang.Thread.run(Thread.java:750)
+	at org.jboss.threads.JBossThread.run(JBossThread.java:485)
+Caused by: java.lang.ClassCastException: org.dom4j.DocumentFactory cannot be cast to org.dom4j.DocumentFactory
+	at org.dom4j.DocumentFactory.getInstance(DocumentFactory.java:97)
+	at org.hibernate.internal.util.xml.XMLHelper$1.doWork(XMLHelper.java:33)
+	at org.hibernate.internal.util.xml.XMLHelper$1.doWork(XMLHelper.java:27)
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.workWithClassLoader(ClassLoaderServiceImpl.java:483)
+	at org.hibernate.internal.util.xml.XMLHelper.<init>(XMLHelper.java:26)
+	at org.hibernate.envers.boot.internal.EnversServiceImpl.initialize(EnversServiceImpl.java:116)
+	at org.hibernate.envers.boot.internal.AdditionalJaxbMappingProducerImpl.produceAdditionalMappings(AdditionalJaxbMappingProducerImpl.java:101)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:297)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:904)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:935)
+	at org.jboss.as.jpa.hibernate5.TwoPhaseBootstrapImpl.build(TwoPhaseBootstrapImpl.java:44)
+	at org.jboss.as.jpa.service.PersistenceUnitServiceImpl$1$1.run(PersistenceUnitServiceImpl.java:167)
+	... 9 more
+
+09:43:04,832 ERROR [org.jboss.as.controller.management-operation] (management-handler-thread - 1) WFLYCTL0013: Operation ("deploy") failed - address: ({"deployment" => "PROVAS~1.WAR"}) - failure description: {"WFLYCTL0080: Failed services" => {"jboss.persistenceunit.\"PROVAS~1.WAR#provasPU\"" => "java.lang.ClassCastException: org.dom4j.DocumentFactory cannot be cast to org.dom4j.DocumentFactory
+    Caused by: java.lang.ClassCastException: org.dom4j.DocumentFactory cannot be cast to org.dom4j.DocumentFactory"}}
+09:43:04,834 ERROR [org.jboss.as.server] (management-handler-thread - 1) WFLYSRV0021: Deploy of deployment "PROVAS~1.WAR" was rolled back with the following failure message: 
+{"WFLYCTL0080: Failed services" => {"jboss.persistenceunit.\"PROVAS~1.WAR#provasPU\"" => "java.lang.ClassCastException: org.dom4j.DocumentFactory cannot be cast to org.dom4j.DocumentFactory
+    Caused by: java.lang.ClassCastException: org.dom4j.DocumentFactory cannot be cast to org.dom4j.DocumentFactory"}}
+09:43:04,879 INFO  [org.jboss.as.jpa] (ServerService Thread Pool -- 139) WFLYJPA0011: Stopping Persistence Unit (phase 1 of 2) Service 'PROVAS~1.WAR#provasPU'
+09:43:04,896 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-3) WFLYJCA0019: Stopped Driver service with driver-name = PROVAS~1.WAR_org.h2.Driver_2_2
+09:43:04,899 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-5) WFLYJCA0019: Stopped Driver service with driver-name = PROVAS~1.WAR_com.mysql.cj.jdbc.Driver_8_0
+09:43:05,026 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-4) WFLYSRV0028: Stopped deployment PROVAS~1.WAR (runtime-name: PROVAS~1.WAR) in 191ms
+09:45:30,170 INFO  [org.jboss.as.repository] (management-handler-thread - 1) WFLYDR0001: Content added at location E:\wildfly-14.0.0.Final\standalone\data\content\97\db82af8038cf8fdb47ce0561bdc5e1c0e988a2\content
+09:45:30,173 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-5) WFLYSRV0027: Starting deployment of "provas-online.war" (runtime-name: "provas-online.war")
+09:45:30,214 ERROR [org.jboss.msc.service.fail] (MSC service thread 1-6) MSC000001: Failed to start service jboss.deployment.unit."provas-online.war".STRUCTURE: org.jboss.msc.service.StartException in service jboss.deployment.unit."provas-online.war".STRUCTURE: WFLYSRV0153: Failed to process phase STRUCTURE of deployment "provas-online.war"
+	at org.jboss.as.server.deployment.DeploymentUnitPhaseService.start(DeploymentUnitPhaseService.java:151)
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.startService(ServiceControllerImpl.java:1736)
+	at org.jboss.msc.service.ServiceControllerImpl$StartTask.execute(ServiceControllerImpl.java:1698)
+	at org.jboss.msc.service.ServiceControllerImpl$ControllerTask.run(ServiceControllerImpl.java:1556)
+	at org.jboss.threads.ContextClassLoaderSavingRunnable.run(ContextClassLoaderSavingRunnable.java:35)
+	at org.jboss.threads.EnhancedQueueExecutor.safeRun(EnhancedQueueExecutor.java:1985)
+	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.doRunTask(EnhancedQueueExecutor.java:1487)
+	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1378)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: org.jboss.as.server.deployment.DeploymentUnitProcessingException: WFLYSRV0160: Failed to mount deployment content
+	at org.jboss.as.server.deployment.module.DeploymentRootMountProcessor.deploy(DeploymentRootMountProcessor.java:95)
+	at org.jboss.as.server.deployment.DeploymentUnitPhaseService.start(DeploymentUnitPhaseService.java:144)
+	... 8 more
+Caused by: java.io.FileNotFoundException: E:\wildfly-14.0.0.Final\standalone\tmp\vfs\temp\temp7c6583293b6d6d80\content-b74c98df0e08ce75\pages\login.xhtml (O sistema não pode encontrar o caminho especificado)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(FileOutputStream.java:270)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:213)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:162)
+	at org.jboss.vfs.VFSUtils.unzip(VFSUtils.java:899)
+	at org.jboss.vfs.VFS.mountZipExpanded(VFS.java:504)
+	at org.jboss.vfs.VFS.mountZipExpanded(VFS.java:533)
+	at org.jboss.as.server.deployment.DeploymentMountProvider$Factory$ServerDeploymentRepositoryImpl.mountDeploymentContent(DeploymentMountProvider.java:108)
+	at org.jboss.as.server.deployment.module.DeploymentRootMountProcessor.deploy(DeploymentRootMountProcessor.java:91)
+	... 9 more
+
+09:45:30,215 ERROR [org.jboss.as.controller.management-operation] (management-handler-thread - 1) WFLYCTL0013: Operation ("deploy") failed - address: ({"deployment" => "provas-online.war"}) - failure description: {"WFLYCTL0080: Failed services" => {"jboss.deployment.unit.\"provas-online.war\".STRUCTURE" => "WFLYSRV0153: Failed to process phase STRUCTURE of deployment \"provas-online.war\"
+    Caused by: org.jboss.as.server.deployment.DeploymentUnitProcessingException: WFLYSRV0160: Failed to mount deployment content
+    Caused by: java.io.FileNotFoundException: E:\\wildfly-14.0.0.Final\\standalone\\tmp\\vfs\\temp\\temp7c6583293b6d6d80\\content-b74c98df0e08ce75\\pages\\login.xhtml (O sistema não pode encontrar o caminho especificado)"}}
+09:45:30,215 ERROR [org.jboss.as.server] (management-handler-thread - 1) WFLYSRV0021: Deploy of deployment "provas-online.war" was rolled back with the following failure message: 
+{"WFLYCTL0080: Failed services" => {"jboss.deployment.unit.\"provas-online.war\".STRUCTURE" => "WFLYSRV0153: Failed to process phase STRUCTURE of deployment \"provas-online.war\"
+    Caused by: org.jboss.as.server.deployment.DeploymentUnitProcessingException: WFLYSRV0160: Failed to mount deployment content
+    Caused by: java.io.FileNotFoundException: E:\\wildfly-14.0.0.Final\\standalone\\tmp\\vfs\\temp\\temp7c6583293b6d6d80\\content-b74c98df0e08ce75\\pages\\login.xhtml (O sistema não pode encontrar o caminho especificado)"}}
+09:45:30,215 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-3) WFLYSRV0028: Stopped deployment provas-online.war (runtime-name: provas-online.war) in 0ms
+09:46:17,369 INFO  [org.jboss.as.repository] (management-handler-thread - 1) WFLYDR0001: Content added at location E:\wildfly-14.0.0.Final\standalone\data\content\b6\624f613cbd330e1195060c1a3cfd4140a68336\content
+09:46:17,371 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-3) WFLYSRV0027: Starting deployment of "provas-online.war" (runtime-name: "provas-online.war")
+09:46:18,061 INFO  [org.jboss.as.jpa] (MSC service thread 1-4) WFLYJPA0002: Read persistence.xml for provasPU
+09:46:18,114 INFO  [org.jboss.as.jpa] (ServerService Thread Pool -- 139) WFLYJPA0010: Starting Persistence Unit (phase 1 of 2) Service 'provas-online.war#provasPU'
+09:46:18,114 INFO  [org.hibernate.jpa.internal.util.LogHelper] (ServerService Thread Pool -- 139) HHH000204: Processing PersistenceUnitInfo [
+	name: provasPU
+	...]
+09:46:18,273 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-1) WFLYJCA0005: Deploying non-JDBC-compliant driver class com.mysql.cj.jdbc.Driver (version 8.0)
+09:46:18,281 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-8) WFLYJCA0018: Started Driver service with driver-name = provas-online.war_com.mysql.cj.jdbc.Driver_8_0
+09:46:18,281 INFO  [org.jboss.as.jpa] (ServerService Thread Pool -- 139) WFLYJPA0010: Starting Persistence Unit (phase 2 of 2) Service 'provas-online.war#provasPU'
+09:46:18,285 INFO  [org.hibernate.dialect.Dialect] (ServerService Thread Pool -- 139) HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+09:46:18,288 INFO  [org.hibernate.envers.boot.internal.EnversServiceImpl] (ServerService Thread Pool -- 139) Envers integration enabled? : true
+09:46:18,302 ERROR [org.jboss.msc.service.fail] (ServerService Thread Pool -- 139) MSC000001: Failed to start service jboss.persistenceunit."provas-online.war#provasPU": org.jboss.msc.service.StartException in service jboss.persistenceunit."provas-online.war#provasPU": java.lang.ClassCastException: org.dom4j.DocumentFactory cannot be cast to org.dom4j.DocumentFactory
+	at org.jboss.as.jpa.service.PersistenceUnitServiceImpl$1$1.run(PersistenceUnitServiceImpl.java:195)
+	at org.jboss.as.jpa.service.PersistenceUnitServiceImpl$1$1.run(PersistenceUnitServiceImpl.java:125)
+	at org.wildfly.security.manager.WildFlySecurityManager.doChecked(WildFlySecurityManager.java:650)
+	at org.jboss.as.jpa.service.PersistenceUnitServiceImpl$1.run(PersistenceUnitServiceImpl.java:209)
+	at org.jboss.threads.ContextClassLoaderSavingRunnable.run(ContextClassLoaderSavingRunnable.java:35)
+	at org.jboss.threads.EnhancedQueueExecutor.safeRun(EnhancedQueueExecutor.java:1985)
+	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.doRunTask(EnhancedQueueExecutor.java:1487)
+	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1378)
+	at java.lang.Thread.run(Thread.java:750)
+	at org.jboss.threads.JBossThread.run(JBossThread.java:485)
+Caused by: java.lang.ClassCastException: org.dom4j.DocumentFactory cannot be cast to org.dom4j.DocumentFactory
+	at org.dom4j.DocumentFactory.getInstance(DocumentFactory.java:97)
+	at org.hibernate.internal.util.xml.XMLHelper$1.doWork(XMLHelper.java:33)
+	at org.hibernate.internal.util.xml.XMLHelper$1.doWork(XMLHelper.java:27)
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.workWithClassLoader(ClassLoaderServiceImpl.java:483)
+	at org.hibernate.internal.util.xml.XMLHelper.<init>(XMLHelper.java:26)
+	at org.hibernate.envers.boot.internal.EnversServiceImpl.initialize(EnversServiceImpl.java:116)
+	at org.hibernate.envers.boot.internal.AdditionalJaxbMappingProducerImpl.produceAdditionalMappings(AdditionalJaxbMappingProducerImpl.java:101)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:297)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:904)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:935)
+	at org.jboss.as.jpa.hibernate5.TwoPhaseBootstrapImpl.build(TwoPhaseBootstrapImpl.java:44)
+	at org.jboss.as.jpa.service.PersistenceUnitServiceImpl$1$1.run(PersistenceUnitServiceImpl.java:167)
+	... 9 more
+
+09:46:18,314 ERROR [org.jboss.as.controller.management-operation] (management-handler-thread - 1) WFLYCTL0013: Operation ("deploy") failed - address: ({"deployment" => "provas-online.war"}) - failure description: {"WFLYCTL0080: Failed services" => {"jboss.persistenceunit.\"provas-online.war#provasPU\"" => "java.lang.ClassCastException: org.dom4j.DocumentFactory cannot be cast to org.dom4j.DocumentFactory
+    Caused by: java.lang.ClassCastException: org.dom4j.DocumentFactory cannot be cast to org.dom4j.DocumentFactory"}}
+09:46:18,315 ERROR [org.jboss.as.server] (management-handler-thread - 1) WFLYSRV0021: Deploy of deployment "provas-online.war" was rolled back with the following failure message: 
+{"WFLYCTL0080: Failed services" => {"jboss.persistenceunit.\"provas-online.war#provasPU\"" => "java.lang.ClassCastException: org.dom4j.DocumentFactory cannot be cast to org.dom4j.DocumentFactory
+    Caused by: java.lang.ClassCastException: org.dom4j.DocumentFactory cannot be cast to org.dom4j.DocumentFactory"}}
+09:46:18,316 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-1) WFLYJCA0019: Stopped Driver service with driver-name = provas-online.war_com.mysql.cj.jdbc.Driver_8_0
+09:46:18,316 INFO  [org.jboss.as.jpa] (ServerService Thread Pool -- 149) WFLYJPA0011: Stopping Persistence Unit (phase 1 of 2) Service 'provas-online.war#provasPU'
+09:46:18,355 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-3) WFLYSRV0028: Stopped deployment provas-online.war (runtime-name: provas-online.war) in 40ms
+09:50:03,201 INFO  [org.jboss.as.repository] (ServerService Thread Pool -- 138) WFLYDR0009: Content E:\wildfly-14.0.0.Final\standalone\data\content\c3\84fe0e4e14ec8391105548e88baac0585aecc1 is obsolete and will be removed
+09:50:03,207 INFO  [org.jboss.as.repository] (ServerService Thread Pool -- 138) WFLYDR0002: Content removed from location E:\wildfly-14.0.0.Final\standalone\data\content\c3\84fe0e4e14ec8391105548e88baac0585aecc1\content
+09:55:03,227 INFO  [org.jboss.as.repository] (ServerService Thread Pool -- 1) WFLYDR0009: Content E:\wildfly-14.0.0.Final\standalone\data\content\b6\624f613cbd330e1195060c1a3cfd4140a68336 is obsolete and will be removed
+09:55:03,231 INFO  [org.jboss.as.repository] (ServerService Thread Pool -- 1) WFLYDR0002: Content removed from location E:\wildfly-14.0.0.Final\standalone\data\content\b6\624f613cbd330e1195060c1a3cfd4140a68336\content
+09:55:03,231 INFO  [org.jboss.as.repository] (ServerService Thread Pool -- 1) WFLYDR0009: Content E:\wildfly-14.0.0.Final\standalone\data\content\97\db82af8038cf8fdb47ce0561bdc5e1c0e988a2 is obsolete and will be removed
+09:55:03,233 INFO  [org.jboss.as.repository] (ServerService Thread Pool -- 1) WFLYDR0002: Content removed from location E:\wildfly-14.0.0.Final\standalone\data\content\97\db82af8038cf8fdb47ce0561bdc5e1c0e988a2\content
+Pressione qualquer tecla para continuar. . . 

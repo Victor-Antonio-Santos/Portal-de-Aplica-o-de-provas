@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<ui:composition template="/templates/admin.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+        <div class="page-title"><h1>Cadastro de Questoes</h1></div>
+        <div class="panel-box">
+            <h:form id="formQuestao">
+                <p:messages id="msgs" showDetail="true" closable="true" autoUpdate="true"/>
+                <div class="question-editor-header">
+                    <div>
+                        <h2>#{questaoCadastroBean.tituloFormulario}</h2>
+                        <p class="muted">Monte ou ajuste a questao selecionada sem sair da tela.</p>
+                    </div>
+                    <h:panelGroup layout="block" styleClass="action-buttons" rendered="#{questaoCadastroBean.editando}">
+                        <p:commandButton value="Cancelar edicao" actionListener="#{questaoCadastroBean.cancelarEdicao}" update="formQuestao" process="@this" styleClass="p-button-secondary"/>
+                    </h:panelGroup>
+                </div>
+                <div class="form-grid">
+                    <div>
+                        <p:outputLabel for="prova" value="Prova"/>
+                        <p:selectOneMenu id="prova" value="#{questaoCadastroBean.provaId}" styleClass="full-width">
+                            <f:selectItem itemLabel="Selecione" itemValue="#{null}"/>
+                            <f:selectItems value="#{questaoCadastroBean.provas}" var="prova" itemLabel="#{prova.titulo}" itemValue="#{prova.id}"/>
+                            <p:ajax update="formQuestao"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div>
+                        <p:outputLabel for="tipo" value="Tipo"/>
+                        <p:selectOneMenu id="tipo" value="#{questaoCadastroBean.questao.tipo}" styleClass="full-width">
+                            <f:selectItems value="#{questaoCadastroBean.tiposQuestao}" var="tipo" itemLabel="#{tipo}" itemValue="#{tipo}"/>
+                            <p:ajax listener="#{questaoCadastroBean.aplicarModeloQuestao}" update="formQuestao"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div><p:outputLabel for="peso" value="Peso"/><p:inputNumber id="peso" value="#{questaoCadastroBean.questao.peso}" decimalPlaces="2" styleClass="full-width"/></div>
+                    <div>
+                        <p:outputLabel value="Ordem da proxima questao"/>
+                        <div class="order-badge">Questao #{questaoCadastroBean.proximaOrdem}</div>
+                    </div>
+                    <div style="grid-column:1/-1;">
+                        <p:outputLabel for="enunciado" value="Enunciado"/>
+                        <p:inputTextarea id="enunciado" value="#{questaoCadastroBean.questao.enunciado}" rows="4" autoResize="false" styleClass="full-width"/>
+                    </div>
+                </div>
+                <p:panel style="margin-top:16px;">
+                    <strong>Modelo selecionado:</strong> #{questaoCadastroBean.questao.tipo}
+                    <br/>
+                    <span class="muted">#{questaoCadastroBean.descricaoModelo}</span>
+                    <br/>
+                    <span class="muted">A ordem de exibicao e automatica e segue a sequencia da prova.</span>
+                    <h:panelGroup rendered="#{not empty questaoCadastroBean.provaId}">
+                        <div class="action-buttons" style="margin-top:12px;">
+                            <h:link outcome="/pages/admin/visualizar-prova.xhtml" value="Visualizar prova completa" styleClass="button-link button-secondary">
+                                <f:param name="id" value="#{questaoCadastroBean.provaId}"/>
+                            </h:link>
+                        </div>
+                    </h:panelGroup>
+                </p:panel>
+                <p:separator/>
+                <h3>Alternativas</h3>
+                <ui:repeat value="#{questaoCadastroBean.alternativas}" var="item">
+                    <div class="alternative-editor-row">
+                        <div class="alternative-editor-input">
+                            <p:inputText value="#{item.texto}" placeholder="Texto da alternativa" styleClass="full-width"/>
+                        </div>
+                        <div class="alternative-editor-flag">
+                            <p:selectBooleanCheckbox value="#{item.correta}">
+                                <p:ajax listener="#{questaoCadastroBean.atualizarMarcacaoCorreta(item)}" process="@form" update="formQuestao"/>
+                            </p:selectBooleanCheckbox>
+                            <h:outputText value="Correta"/>
+                        </div>
+                        <h:panelGroup layout="block" styleClass="alternative-editor-actions" rendered="#{questaoCadastroBean.editando and questaoCadastroBean.questao.tipo ne 'VERDADEIRO_FALSO'}">
+                            <p:commandButton value="Remover" actionListener="#{questaoCadastroBean.removerAlternativaEmEdicao(item)}"
+                                             update="formQuestao" process="@this" styleClass="p-button-danger p-button-text"/>
+                        </h:panelGroup>
+                    </div>
+                </ui:repeat>
+                <div style="margin-bottom:16px;">
+                    <p:commandButton value="Adicionar alternativa" actionListener="#{questaoCadastroBean.adicionarAlternativa}" update="formQuestao" process="@this" styleClass="p-button-secondary"
+                                     disabled="#{questaoCadastroBean.questao.tipo eq 'VERDADEIRO_FALSO'}"/>
+                </div>
+                <div class="action-buttons">
+                    <p:commandButton value="#{questaoCadastroBean.editando ? 'Atualizar questao' : 'Salvar questao'}"
+                                     action="#{questaoCadastroBean.salvarQuestao}" process="@form"
+                                     ajax="false" icon="pi pi-save"/>
+                </div>
+                <p:separator/>
+                <h3>Questoes ja criadas para a prova</h3>
+                <p:dataTable value="#{questaoCadastroBean.questoesDaProvaSelecionada}" var="questaoSalva" paginator="true" rows="5"
+                             styleClass="question-summary-table"
+                             rendered="#{not empty questaoCadastroBean.provaId}" emptyMessage="Nenhuma questao cadastrada para esta prova ainda.">
+                    <p:column headerText="Ordem">#{questaoSalva.ordemExibicao}</p:column>
+                    <p:column headerText="Enunciado">#{questaoSalva.enunciado}</p:column>
+                    <p:column headerText="Tipo">#{questaoSalva.tipo}</p:column>
+                    <p:column headerText="Peso">#{questaoSalva.peso}</p:column>
+                    <p:column headerText="Resumo das alternativas">
+                        <span class="muted">#{questaoCadastroBean.resumoAlternativas(questaoSalva)}</span>
+                    </p:column>
+                    <p:column headerText="Acoes">
+                        <div class="action-buttons">
+                            <p:commandButton value="Editar" actionListener="#{questaoCadastroBean.editarQuestao(questaoSalva)}"
+                                             update="formQuestao" process="@this" icon="pi pi-pencil"/>
+                            <p:commandButton value="Excluir" actionListener="#{questaoCadastroBean.excluirQuestao(questaoSalva.id)}"
+                                             update="formQuestao :messages" process="@this" ajax="false" icon="pi pi-trash"
+                                             styleClass="p-button-danger"
+                                             onclick="return confirm('Deseja realmente excluir esta questao?');"/>
+                        </div>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+

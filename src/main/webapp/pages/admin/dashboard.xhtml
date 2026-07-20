@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<ui:composition template="/templates/admin.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+        <div class="page-title">
+            <h1>Dashboard Administrativo</h1>
+            <p class="muted">Visao consolidada das provas, status e desempenho.</p>
+        </div>
+        <h:form id="formDashboard">
+            <div class="panel-box" style="margin-bottom:18px;">
+                <div class="form-grid">
+                    <div>
+                        <p:outputLabel for="turma" value="Turma"/>
+                        <p:selectOneMenu id="turma" value="#{adminDashboardBean.turmaId}" styleClass="full-width">
+                            <f:selectItem itemLabel="Todas as turmas" itemValue="#{null}"/>
+                            <f:selectItems value="#{adminDashboardBean.turmas}" var="turma" itemLabel="#{turma.nome}" itemValue="#{turma.id}"/>
+                        </p:selectOneMenu>
+                    </div>
+                </div>
+                <div style="margin-top:16px;">
+                    <p:commandButton value="Aplicar filtro" actionListener="#{adminDashboardBean.filtrar}" process="@form" update="formDashboard" icon="pi pi-filter"/>
+                </div>
+            </div>
+            <div class="grid-cards">
+                <p:commandButton value="Colaboradores&#10;#{adminDashboardBean.resumo.totalColaboradores}" actionListener="#{adminDashboardBean.limparFiltroIndicador}"
+                                 process="@this" update="formDashboard" styleClass="dashboard-card-button #{not adminDashboardBean.existeFiltroIndicador ? 'dashboard-card-active' : ''}"/>
+                <p:commandButton value="Provas&#10;#{adminDashboardBean.resumo.totalProvas}" actionListener="#{adminDashboardBean.limparFiltroIndicador}"
+                                 process="@this" update="formDashboard" styleClass="dashboard-card-button #{not adminDashboardBean.existeFiltroIndicador ? 'dashboard-card-active' : ''}"/>
+                <p:commandButton value="Pendentes&#10;#{adminDashboardBean.resumo.provasPendentes}" actionListener="#{adminDashboardBean.filtrarIndicador('PENDENTE')}"
+                                 process="@this" update="formDashboard" styleClass="dashboard-card-button #{adminDashboardBean.filtroAtivo('PENDENTE') ? 'dashboard-card-active' : ''}"/>
+                <p:commandButton value="Finalizadas&#10;#{adminDashboardBean.resumo.provasFinalizadas}" actionListener="#{adminDashboardBean.filtrarIndicador('FINALIZADA')}"
+                                 process="@this" update="formDashboard" styleClass="dashboard-card-button #{adminDashboardBean.filtroAtivo('FINALIZADA') ? 'dashboard-card-active' : ''}"/>
+                <div class="card-indicator"><span class="muted">Media</span><strong>#{adminDashboardBean.resumo.mediaNotas}</strong></div>
+                <div class="card-indicator">
+                    <span class="muted">Aprovados / Reprovados</span>
+                    <strong>#{adminDashboardBean.resumo.aprovados} / #{adminDashboardBean.resumo.reprovados}</strong>
+                    <div class="dashboard-card-actions">
+                        <p:commandButton value="Aprovados" actionListener="#{adminDashboardBean.filtrarIndicador('APROVADOS')}"
+                                         process="@this" update="formDashboard" styleClass="p-button-text dashboard-mini-filter #{adminDashboardBean.filtroAtivo('APROVADOS') ? 'dashboard-mini-filter-active' : ''}"/>
+                        <p:commandButton value="Reprovados" actionListener="#{adminDashboardBean.filtrarIndicador('REPROVADOS')}"
+                                         process="@this" update="formDashboard" styleClass="p-button-text dashboard-mini-filter #{adminDashboardBean.filtroAtivo('REPROVADOS') ? 'dashboard-mini-filter-active' : ''}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-box">
+                <div class="dashboard-table-header">
+                    <h3>Ultimos envios</h3>
+                    <h:panelGroup rendered="#{adminDashboardBean.existeFiltroIndicador}">
+                        <div class="dashboard-filter-chip">
+                            Filtro ativo: #{adminDashboardBean.descricaoFiltro}
+                            <p:commandButton value="Limpar" actionListener="#{adminDashboardBean.limparFiltroIndicador}"
+                                             process="@this" update="formDashboard" styleClass="p-button-text dashboard-clear-filter"/>
+                        </div>
+                    </h:panelGroup>
+                </div>
+                <p:dataTable value="#{adminDashboardBean.enviosRecentes}" var="envio" paginator="true" rows="8" reflow="true">
+                    <p:column headerText="Prova">#{envio.prova.titulo}</p:column>
+                    <p:column headerText="Colaborador">#{envio.colaborador.nome}</p:column>
+                    <p:column headerText="Turma">#{envio.colaborador.turma != null ? envio.colaborador.turma.nome : '-'}</p:column>
+                    <p:column headerText="Status">#{envio.status}</p:column>
+                    <p:column headerText="Nota">#{envio.nota}</p:column>
+                    <p:column headerText="Limite">
+                        <h:outputText value="#{envio.dataLimite}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Acoes">
+                        <div class="action-buttons">
+                            <p:commandButton value="Excluir" actionListener="#{adminDashboardBean.excluirEnvio(envio.id)}"
+                                             update="formDashboard :messages" process="@this" ajax="false" icon="pi pi-trash" styleClass="p-button-danger"
+                                             onclick="return confirm('Deseja realmente excluir este envio de prova?');"/>
+                        </div>
+                    </p:column>
+                </p:dataTable>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

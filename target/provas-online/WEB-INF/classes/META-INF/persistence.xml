@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+    <persistence-unit name="provasPU" transaction-type="RESOURCE_LOCAL">
+        <class>br.com.empresa.provas.entity.Usuario</class>
+        <class>br.com.empresa.provas.entity.Turma</class>
+        <class>br.com.empresa.provas.entity.Prova</class>
+        <class>br.com.empresa.provas.entity.Questao</class>
+        <class>br.com.empresa.provas.entity.Alternativa</class>
+        <class>br.com.empresa.provas.entity.ProvaColaborador</class>
+        <class>br.com.empresa.provas.entity.RespostaColaborador</class>
+        <class>br.com.empresa.provas.entity.LogOperacao</class>
+        <properties>
+            <!--Admin: 529.982.247-25 | admin123-->
+            <!--Colaborador: 111.444.777-35 | colab123-->
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/provas_online?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=America/Sao_Paulo"/>
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.password" value="azsxdc12@#"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+</persistence>

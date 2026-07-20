@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<ui:composition template="/templates/admin.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewParam name="id" value="#{provaVisualizacaoBean.id}"/>
+            <f:viewAction action="#{provaVisualizacaoBean.carregar}"/>
+        </f:metadata>
+    </ui:define>
+    <ui:define name="content">
+        <div class="page-title">
+            <h1>Visualizacao da Prova</h1>
+            <p class="muted">Confira como a prova sera apresentada antes de enviar aos colaboradores.</p>
+        </div>
+
+        <div class="panel-box" rendered="#{not empty provaVisualizacaoBean.prova}">
+            <div class="preview-header">
+                <div>
+                    <h2 style="margin:0;">#{provaVisualizacaoBean.prova.titulo}</h2>
+                    <p class="muted" style="margin:8px 0 0 0;">#{provaVisualizacaoBean.prova.descricao}</p>
+                </div>
+                <div class="preview-actions">
+                    <h:link outcome="/pages/admin/cadastro-prova.xhtml" value="Voltar para provas" styleClass="preview-link"/>
+                    <h:link outcome="/pages/admin/cadastro-questoes.xhtml" value="Editar questoes" styleClass="preview-link">
+                        <f:param name="provaId" value="#{provaVisualizacaoBean.prova.id}"/>
+                    </h:link>
+                </div>
+            </div>
+
+            <div class="grid-cards" style="margin-top:20px;">
+                <div class="card-indicator">
+                    <span class="muted">Tempo limite</span>
+                    <strong>#{provaVisualizacaoBean.prova.tempoMinutos} min</strong>
+                </div>
+                <div class="card-indicator">
+                    <span class="muted">Nota minima</span>
+                    <strong>#{provaVisualizacaoBean.prova.notaMinima}</strong>
+                </div>
+                <div class="card-indicator">
+                    <span class="muted">Status</span>
+                    <strong>#{provaVisualizacaoBean.prova.status}</strong>
+                </div>
+                <div class="card-indicator">
+                    <span class="muted">Questoes</span>
+                    <strong>#{provaVisualizacaoBean.prova.quantidadeQuestoes}</strong>
+                </div>
+            </div>
+
+            <p:panel style="margin-bottom:20px;">
+                <strong>Resultado ao final:</strong>
+                <h:outputText value="#{provaVisualizacaoBean.prova.mostrarResultado ? ' permitido para o colaborador.' : ' oculto para o colaborador.'}"/>
+            </p:panel>
+
+            <ui:repeat value="#{provaVisualizacaoBean.prova.questoes}" var="questao">
+                <div class="question-box">
+                    <div class="question-meta">
+                        <strong>#{questao.ordemExibicao}. #{questao.enunciado}</strong>
+                        <span class="muted">#{provaVisualizacaoBean.tipoFormatado(questao)} | Peso #{questao.peso}</span>
+                    </div>
+                    <ui:repeat value="#{questao.alternativas}" var="alternativa">
+                        <div class="preview-option #{alternativa.correta ? 'correct-option' : ''}">
+                            <span>#{alternativa.texto}</span>
+                            <span class="muted">#{alternativa.correta ? 'Correta' : 'Alternativa'}</span>
+                        </div>
+                    </ui:repeat>
+                </div>
+            </ui:repeat>
+        </div>
+    </ui:define>
+</ui:composition>
+

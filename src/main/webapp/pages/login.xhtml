@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Login - Provas Online</title>
+    <h:outputStylesheet library="css" name="app.css"/>
+</h:head>
+<h:body>
+    <div class="login-screen" style="background-image: linear-gradient(90deg, rgba(8, 15, 31, 0.26), rgba(8, 15, 31, 0.14)), url('#{resource['images:logo-portal-provas-bg.png']}');">
+        <div class="login-card">
+            <p class="muted">Autenticacao de colaboradores e administradores.</p>
+            <h:form id="formLogin">
+                <p:growl id="messages" showDetail="true" autoUpdate="true"/>
+                <div class="form-grid">
+                    <div>
+                        <p:outputLabel for="cpf" value="CPF"/>
+                        <p:inputMask id="cpf" mask="999.999.999-99" value="#{loginBean.cpf}" styleClass="full-width" required="true"/>
+                    </div>
+                    <div>
+                        <p:outputLabel for="perfil" value="Tipo de acesso"/>
+                        <p:selectOneMenu id="perfil" value="#{loginBean.tipoAcesso}" styleClass="full-width">
+                            <f:selectItem itemLabel="Colaborador" itemValue="ROLE_COLABORADOR"/>
+                            <f:selectItem itemLabel="Aplicador / Administrador" itemValue="ROLE_ADMIN"/>
+                        </p:selectOneMenu>
+                    </div>
+                </div>
+                <div style="margin-top:16px;">
+                    <p:outputLabel for="senha" value="Senha"/>
+                    <p:password id="senha" value="#{loginBean.senha}" feedback="false" styleClass="full-width" required="true"/>
+                </div>
+                <div style="margin-top:20px;">
+                    <p:commandButton value="Entrar" icon="pi pi-sign-in" action="#{loginBean.login}" ajax="false" styleClass="full-width"/>
+                </div>
+                <div style="margin-top:14px;">
+                    <h:link outcome="/pages/cadastro-inicial.xhtml" value="Primeiro acesso? Faca seu cadastro" styleClass="preview-link"/>
+                </div>
+                <p class="muted" style="margin-top:16px;">Acesso teste: admin `529.982.247-25` / `admin123` ou colaborador `111.444.777-35` / `colab123`.</p>
+            </h:form>
+        </div>
+    </div>
+</h:body>
+</html>
+

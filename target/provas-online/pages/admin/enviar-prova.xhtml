@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<ui:composition template="/templates/admin.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+        <div class="page-title"><h1>Envio de Provas</h1></div>
+        <div class="panel-box">
+            <h:form id="formEnvio">
+                <p:messages id="msgs" showDetail="true" closable="true" autoUpdate="true"/>
+                <div class="form-grid">
+                    <div>
+                        <p:outputLabel for="prova" value="Prova"/>
+                        <p:selectOneMenu id="prova" value="#{envioProvaBean.provaId}" styleClass="full-width">
+                            <f:selectItem itemLabel="Selecione" itemValue="#{null}"/>
+                            <f:selectItems value="#{envioProvaBean.provas}" var="prova" itemLabel="#{prova.titulo}" itemValue="#{prova.id}"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div>
+                        <p:outputLabel for="turma" value="Turma"/>
+                        <p:selectOneMenu id="turma" value="#{envioProvaBean.turmaId}" styleClass="full-width">
+                            <f:selectItem itemLabel="Todas as turmas" itemValue="#{null}"/>
+                            <f:selectItems value="#{envioProvaBean.turmas}" var="turma" itemLabel="#{turma.nome}" itemValue="#{turma.id}"/>
+                            <p:ajax listener="#{envioProvaBean.filtrarPorTurma}" process="@this" update="colaboradoresBox acoesColaboradores"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div>
+                        <p:outputLabel for="limite" value="Data limite"/>
+                        <p:calendar id="limite" value="#{envioProvaBean.dataLimite}" pattern="dd/MM/yyyy HH:mm" showOn="button" navigator="true"/>
+                    </div>
+                    <div>
+                        <p:outputLabel for="tentativas" value="Tentativas permitidas"/>
+                        <p:inputNumber id="tentativas" value="#{envioProvaBean.tentativasPermitidas}" decimalPlaces="0"/>
+                    </div>
+                    <div>
+                        <p:selectBooleanCheckbox id="imediata" value="#{envioProvaBean.disponivelImediatamente}"/>
+                        <p:outputLabel for="imediata" value="Disponivel imediatamente"/>
+                    </div>
+                    <h:panelGroup id="acoesColaboradores" layout="block" style="grid-column:1/-1;">
+                        <p:outputLabel for="colaboradores" value="Colaboradores"/>
+                        <div class="action-buttons" style="margin:8px 0 12px 0;">
+                            <div class="inline-checkbox">
+                                <p:selectBooleanCheckbox id="enviarTurma" value="#{envioProvaBean.enviarParaTodaTurma}">
+                                    <p:ajax process="@this" update="colaboradoresBox"/>
+                                </p:selectBooleanCheckbox>
+                                <p:outputLabel for="enviarTurma" value="Enviar para toda a turma selecionada"/>
+                            </div>
+                            <div class="inline-checkbox">
+                                <p:selectBooleanCheckbox id="selecionarTodos" value="#{envioProvaBean.selecionarTodos}">
+                                    <p:ajax listener="#{envioProvaBean.alternarSelecaoTodos}" process="@this" update="colaboradoresBox acoesColaboradores"/>
+                                </p:selectBooleanCheckbox>
+                                <p:outputLabel for="selecionarTodos" value="Selecionar todos"/>
+                            </div>
+                            <p:commandButton value="Limpar selecao" actionListener="#{envioProvaBean.limparSelecaoColaboradores}" process="@this"
+                                             update="colaboradoresBox acoesColaboradores" styleClass="p-button-secondary p-button-sm"/>
+                        </div>
+                    </h:panelGroup>
+                    <h:panelGroup id="colaboradoresBox" layout="block" style="grid-column:1/-1;">
+                        <p:selectManyCheckbox id="colaboradores" value="#{envioProvaBean.colaboradoresSelecionados}" layout="pageDirection">
+                            <f:selectItems value="#{envioProvaBean.colaboradores}" var="colab" itemLabel="#{colab.nome} - #{colab.cpf}#{colab.turma != null ? ' - ' : ''}#{colab.turma != null ? colab.turma.nome : ''}" itemValue="#{colab.id}"/>
+                        </p:selectManyCheckbox>
+                        <h:panelGroup rendered="#{empty envioProvaBean.colaboradores}">
+                            <p class="muted">Nao ha colaboradores disponiveis para a turma selecionada.</p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </div>
+                <div style="margin-top:20px;">
+                    <p:commandButton value="Enviar prova" actionListener="#{envioProvaBean.enviar}" update="formEnvio :messages" icon="pi pi-send"/>
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+

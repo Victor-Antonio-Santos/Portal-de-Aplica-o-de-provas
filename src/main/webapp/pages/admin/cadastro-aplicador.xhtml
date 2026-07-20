@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<ui:composition template="/templates/admin.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+        <div class="page-title">
+            <h1>Cadastro de Aplicadores</h1>
+        </div>
+        <div class="panel-box">
+            <h:form id="formAplicador">
+                <p:messages id="msgs" showDetail="true" closable="true"/>
+                <div class="form-grid">
+                    <div><p:outputLabel for="nome" value="Nome"/><p:inputText id="nome" value="#{aplicadorCadastroBean.aplicador.nome}" styleClass="full-width" required="true"/></div>
+                    <div><p:outputLabel for="cpf" value="CPF"/><p:inputMask id="cpf" mask="999.999.999-99" value="#{aplicadorCadastroBean.aplicador.cpf}" styleClass="full-width" required="true"/></div>
+                    <div><p:outputLabel for="email" value="E-mail"/><p:inputText id="email" value="#{aplicadorCadastroBean.aplicador.email}" styleClass="full-width"/></div>
+                    <div><p:outputLabel for="senha" value="Senha"/><p:password id="senha" value="#{aplicadorCadastroBean.senha}" styleClass="full-width" feedback="false" required="#{empty aplicadorCadastroBean.aplicador.id}"/></div>
+                    <div>
+                        <p:outputLabel for="status" value="Status"/>
+                        <p:selectOneMenu id="status" value="#{aplicadorCadastroBean.aplicador.status}" styleClass="full-width">
+                            <f:selectItems value="#{aplicadorCadastroBean.statusDisponiveis}" var="status" itemLabel="#{status}" itemValue="#{status}"/>
+                        </p:selectOneMenu>
+                    </div>
+                </div>
+                <div style="margin-top:20px;">
+                    <p:commandButton value="Salvar" actionListener="#{aplicadorCadastroBean.salvar}" update="formAplicador :messages" icon="pi pi-save"/>
+                    <p:commandButton value="Novo" actionListener="#{aplicadorCadastroBean.novo}" update="formAplicador" process="@this" styleClass="p-button-secondary"/>
+                </div>
+                <p:separator/>
+                <p:dataTable value="#{aplicadorCadastroBean.aplicadores}" var="aplicador" paginator="true" rows="8">
+                    <p:column headerText="Nome">#{aplicador.nome}</p:column>
+                    <p:column headerText="CPF">#{aplicador.cpf}</p:column>
+                    <p:column headerText="Status">#{aplicador.status}</p:column>
+                    <p:column headerText="Acoes">
+                        <p:commandButton value="Editar" actionListener="#{aplicadorCadastroBean.editar(aplicador)}" update="formAplicador" process="@this" styleClass="p-button-text"/>
+                        <p:commandButton value="Excluir" actionListener="#{aplicadorCadastroBean.excluir(aplicador.id)}" update="formAplicador" process="@this" styleClass="p-button-danger p-button-text"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+

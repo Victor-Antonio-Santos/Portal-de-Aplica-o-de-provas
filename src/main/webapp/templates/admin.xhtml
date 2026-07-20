@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:p="http://primefaces.org/ui">
+<ui:insert name="metadata"/>
+<h:head>
+    <title>Portal Administrativo</title>
+    <h:outputStylesheet library="css" name="app.css"/>
+</h:head>
+<h:body styleClass="app-body">
+    <div class="shell">
+        <aside class="sidebar">
+            <h2>Provas Online</h2>
+            <p class="muted">Administracao</p>
+            <h:link outcome="/pages/admin/dashboard.xhtml" value="Dashboard"/>
+            <h:link outcome="/pages/admin/cadastro-turma.xhtml" value="Gerenciamento de Turmas"/>
+            <h:link outcome="/pages/admin/cadastro-colaborador.xhtml" value="Gerenciamento de Colaboradores"/>
+            <h:link outcome="/pages/admin/importacao-colaboradores.xhtml" value="Massiva de Colaboradores"/>
+            <h:link outcome="/pages/admin/cadastro-aplicador.xhtml" value="Aplicadores"/>
+            <h:link outcome="/pages/admin/cadastro-prova.xhtml" value="Provas"/>
+            <h:link outcome="/pages/admin/cadastro-questoes.xhtml" value="Questoes"/>
+            <h:link outcome="/pages/admin/enviar-prova.xhtml" value="Envio de Provas"/>
+            <h:link outcome="/pages/admin/relatorios.xhtml" value="Relatorios"/>
+        </aside>
+        <main class="content">
+            <header class="topbar">
+                <div>
+                    <strong>#{sessionBean.usuarioLogado.nome}</strong>
+                    <span class="muted">#{sessionBean.usuarioLogado.perfil}</span>
+                </div>
+                <h:form>
+                    <p:commandButton value="Sair" action="#{sessionBean.logout}" icon="pi pi-sign-out" styleClass="p-button-secondary"/>
+                </h:form>
+            </header>
+            <p:growl id="messages" showDetail="true" autoUpdate="true"/>
+            <ui:insert name="content"/>
+        </main>
+    </div>
+</h:body>
+</html>
+

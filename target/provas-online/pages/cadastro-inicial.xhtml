@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Cadastro Inicial - Provas Online</title>
+    <h:outputStylesheet library="css" name="app.css"/>
+</h:head>
+<h:body>
+    <div class="login-screen">
+        <div class="login-card">
+            <h1>Primeiro Cadastro</h1>
+            <p class="muted">Crie seu acesso com CPF e senha para entrar no portal e realizar suas provas.</p>
+            <h:form id="formCadastroInicial">
+                <p:growl id="messages" showDetail="true" autoUpdate="true"/>
+                <div class="form-grid">
+                    <div>
+                        <p:outputLabel for="nome" value="Nome completo"/>
+                        <p:inputText id="nome" value="#{autoCadastroColaboradorBean.colaborador.nome}" styleClass="full-width" required="true"/>
+                    </div>
+                    <div>
+                        <p:outputLabel for="cpf" value="CPF"/>
+                        <p:inputMask id="cpf" mask="999.999.999-99" value="#{autoCadastroColaboradorBean.colaborador.cpf}" styleClass="full-width" required="true"/>
+                    </div>
+                    <div>
+                        <p:outputLabel for="email" value="E-mail"/>
+                        <p:inputText id="email" value="#{autoCadastroColaboradorBean.colaborador.email}" styleClass="full-width"/>
+                    </div>
+                    <div>
+                        <p:outputLabel for="turma" value="Turma"/>
+                        <p:selectOneMenu id="turma" value="#{autoCadastroColaboradorBean.turmaId}" styleClass="full-width" required="true">
+                            <f:selectItem itemLabel="Selecione uma turma" itemValue="#{null}"/>
+                            <f:selectItems value="#{autoCadastroColaboradorBean.turmasAtivas}" var="turma"
+                                           itemLabel="#{turma.nome} - #{turma.aplicadorResponsavel.nome}"
+                                           itemValue="#{turma.id}"/>
+                        </p:selectOneMenu>
+                    </div>
+                </div>
+                <div class="form-grid" style="margin-top:16px;">
+                    <div>
+                        <p:outputLabel for="senha" value="Senha"/>
+                        <p:password id="senha" value="#{autoCadastroColaboradorBean.senha}" feedback="false" styleClass="full-width" required="true"/>
+                    </div>
+                    <div>
+                        <p:outputLabel for="confirmacaoSenha" value="Confirmar senha"/>
+                        <p:password id="confirmacaoSenha" value="#{autoCadastroColaboradorBean.confirmacaoSenha}" feedback="false" styleClass="full-width" required="true"/>
+                    </div>
+                </div>
+                <div class="action-buttons" style="margin-top:20px;">
+                    <p:commandButton value="Cadastrar" icon="pi pi-user-plus" action="#{autoCadastroColaboradorBean.cadastrar}" ajax="false"/>
+                    <h:link outcome="/pages/login.xhtml" value="Voltar ao login" styleClass="button-link button-secondary"/>
+                </div>
+            </h:form>
+        </div>
+    </div>
+</h:body>
+</html>
+
